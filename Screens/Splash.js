@@ -9,7 +9,7 @@ function SplashOne({navigation}) {
     navigation.navigate('MainTitle')
   }
 
-  setTimeout(redirectMain, 4000)
+  setTimeout(redirectMain, 10)
 
 var {width} = Dimensions.get('window'); 
 var {height} = Dimensions.get('window'); 
