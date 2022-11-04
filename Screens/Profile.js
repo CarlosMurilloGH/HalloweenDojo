@@ -1,20 +1,21 @@
 import React from 'react';
 import { View,Text, Image,Dimensions,StyleSheet,Button } from 'react-native';
+import { SafeAreaView } from 'react-native-web';
 
 
-function Profile(props){
+function Profile(props,navigation){
 
     var {height} = Dimensions.get('window'); 
     console.log(props);
     const {name,image,species,gender,status,location}= props.route.params.personaje;
    
     return(
-        <View>
+        <SafeAreaView>
             <Button
                 title="Go back"
                 onPress={()=>{
                     navigation.navigate('Dashboard')
-                }}
+                  }}
             />
             <View>
                 <Image
@@ -53,7 +54,7 @@ function Profile(props){
                     </View>
             </View>
             
-        </View>
+        </SafeAreaView>
     )
 }
 

@@ -1,9 +1,6 @@
 import { View,Text, Image, Dimensions, StyleSheet, SafeAreaView } from 'react-native';
 import BotonPrincipal from '../components/BotonPrincipal';
 import BotonSecundario from '../components/BotonSecundario';
-import Login from '../Screens/Login';
-
-
 
 function MainTitle({navigation}) {
 

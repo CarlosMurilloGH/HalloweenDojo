@@ -8,6 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { TextInput, TouchableOpacity } from 'react-native-web';
 import PersonajesMujeres from '../components/PersonajesMujeres';
 import PersonajesHombres from '../components/PersonajesHombres';
+import PersonajesHumano from '../components/PersonajeHumanos';
 
 const auth = getAuth(firebaseApp);
 
@@ -39,6 +40,10 @@ function Dashboard({navigation}) {
       PersonajesHombres(setPersonajes)
     }
 
+    const handleHuman=()=>{
+      PersonajesHumanos(setPersonajes)
+    }
+
   return (
     <View>
       <LinearGradient
@@ -48,28 +53,32 @@ function Dashboard({navigation}) {
       >
       <View>
       <View>
-        <Text>Select your Character</Text>
+        <Text style={styles.header}>Select your Character</Text>
       </View>
 
-      <View>
+      <View style={styles.inputContainer}>
       <TextInput
         style={styles.input}
-        placeholder="Buscar personajes"
+        placeholder="Search"
         onChange={(event)=>{setSearchTerm(event.target.value)}}
       />
       </View>
 
-      <View>
+      <View style={styles.filterContainer}>
       <TouchableOpacity onPress={handleFetch}>
-          <Text>All</Text>
+          <Text style={styles.filterButton}>All</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={handleFemale}>
-          <Text>Female</Text>
+          <Text style={styles.filterButton}>Female</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={handleMale}>
-          <Text>Male</Text>
+          <Text style={styles.filterButton}>Male</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={handleHuman}>
+          <Text style={styles.filterButton}>Human</Text>
         </TouchableOpacity>
       </View>
 
@@ -100,9 +109,13 @@ function Dashboard({navigation}) {
                     source={{ uri: `${personaje.image}` }} 
                 />
               <View style={styles.textContainer}>
-                <Text style={styles.nameStyle}>{personaje.name}</Text>
+                <View style={styles.nameContainer}>
+                  <Text style={styles.nameStyle}>{personaje.name}</Text>
+                </View>
                 <View style={styles.infoContainer}>
-                    <Text>{personaje.species}</Text>
+                    <View>
+                      <Text>{personaje.species}</Text>
+                    </View>
                     <Text>{personaje.gender}</Text>
                 </View>
               </View>
@@ -124,16 +137,53 @@ function Dashboard({navigation}) {
 
 
 const styles = StyleSheet.create({
+  header:{
+    color:'black',
+    fontSize:20,
+    fontWeight:'bold',
+    textAlign:'center',
+    marginTop:20,
+  },
+  inputContainer:{
+    width:'90%',
+    marginLeft:'auto',
+    marginRight:'auto',
+    display:'block',
+    marginTop:20,
+    marginBottom:20,
+  },
   input: {
     height: 40,
-    margin: 12,
     borderWidth: 1,
-    padding: 10,
+    padding: 15,
     backgroundColor:'white',
+    borderRadius:20,
+    width:'100%',
   },
   background: {
     width:'100%',
     height: '100%',
+  },
+  filterContainer:{
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'space-around',
+    paddingTop:10,
+    paddingBottom:10,
+    marginBottom:20,
+  },
+  filterButton:{
+    display:'block',
+    paddingTop:10,
+    paddingBottom:10,
+    paddingLeft:20,
+    paddingRight:20,
+    color:'#555',
+    backgroundColor:'white',
+    borderTopLeftRadius:10,
+    borderTopRightRadius:10,
+    borderBottomLeftRadius:10,
+    borderBottomRightRadius:10,
   },
   cardsContainer:{
     display:'grid',
@@ -143,7 +193,22 @@ infoContainer:{
     paddingTop:20,
     paddingBottom:20,
     display:'flex',
+    flexDirection:'row',
+    marginLeft:'auto',
+    marginRight:'auto',
+    justifyContent:'space-around',
+    width:'90%',
 },
+species:{
+  borderStyle:'solid',
+  borderColor:'black',
+  borderBottomWidth:0,
+  borderTopWidth:0,
+  borderLeftWidth:0,
+  borderRightWidth:1,
+  marginLeft:'auto',
+  marginRight:'auto',
+},  
 textContainer:{
     backgroundColor:'white',
     paddingTop:0,
@@ -160,6 +225,16 @@ personajeCard:{
     marginLeft:'auto',
     marginRight:'auto',
 },
+nameContainer:{
+  borderStyle:'solid',
+  borderBottomWidth:1,
+  borderTopWidth:0,
+  borderLeftWidth:0,
+  borderRightWidth:0,
+  width:'80%',
+  marginLeft:'auto',
+  marginRight:'auto',
+},
 nameStyle:{
     display:'block',
     marginLeft:'auto', 
@@ -167,6 +242,8 @@ nameStyle:{
     textAlign:'center',
     paddingTop:20,
     paddingBottom:20,
+    fontSize:20,
+    color:'#777',
 },
 });
 
