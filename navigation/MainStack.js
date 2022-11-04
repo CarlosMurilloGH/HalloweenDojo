@@ -7,6 +7,7 @@ import GetStarted from '../Screens/GetStarted';
 import Login from '../Screens/Login';
 import SignUp from '../Screens/SignUp';
 import Dashboard from '../Screens/Dashboard';
+import Profile from '../Screens/Profile';
 
 
 
@@ -44,6 +45,10 @@ const MainStack=()=>{
             <Stack.Screen 
                 name="Dashboard"
                 component={Dashboard}
+                /> 
+            <Stack.Screen 
+                name="Profile"
+                component={Profile}
                 /> 
                 
           </Stack.Navigator>
